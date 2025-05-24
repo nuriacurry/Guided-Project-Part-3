@@ -263,15 +263,115 @@ do
 
         case "3":
             // Ensure animal ages and physical descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    // Extract pet ID for display
+                    string petID = ourAnimals[i, 0].Replace("ID #: ", "");
+                    
+                    // Check and update age if missing or invalid
+                    string currentAge = ourAnimals[i, 2].Replace("Age: ", "");
+                    if (currentAge == "" || currentAge == "?")
+                    {
+                        bool validAge = false;
+                        do
+                        {
+                            Console.WriteLine($"Enter an age for ID #: {petID}");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                animalAge = readResult.Trim();
+                                if (int.TryParse(animalAge, out int age))
+                                {
+                                    validAge = true;
+                                    ourAnimals[i, 2] = "Age: " + animalAge;
+                                }
+                            }
+                        } while (!validAge);
+                    }
+                    
+                    // Check and update physical description if missing
+                    string currentDescription = ourAnimals[i, 4].Replace("Physical description: ", "");
+                    if (currentDescription == "" || currentDescription == "tbd")
+                    {
+                        bool validDescription = false;
+                        do
+                        {
+                            Console.WriteLine($"Enter a physical description for ID #: {petID} (size, color, breed, gender, weight, housebroken)");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                animalPhysicalDescription = readResult.Trim();
+                                if (animalPhysicalDescription.Length > 0)
+                                {
+                                    validDescription = true;
+                                    ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
+                                }
+                            }
+                        } while (!validDescription);
+                    }
+                }
+            }
+            Console.WriteLine("Age and physical description fields are complete for all of our friends.");
+            Console.WriteLine("Press the Enter key to continue");
             readResult = Console.ReadLine();
             break;
 
         case "4":
             // Ensure animal nicknames and personality descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
-            Console.WriteLine("Press the Enter key to continue.");
+            for (int i = 0; i < maxPets; i++)
+            {
+                if (ourAnimals[i, 0] != "ID #: ")
+                {
+                    // Extract pet ID for display
+                    string petID = ourAnimals[i, 0].Replace("ID #: ", "");
+                    
+                    // Check and update nickname if missing
+                    string currentNickname = ourAnimals[i, 3].Replace("Nickname: ", "");
+                    if (currentNickname == "" || currentNickname == "tbd")
+                    {
+                        bool validNickname = false;
+                        do
+                        {
+                            Console.WriteLine($"Enter a nickname for ID #: {petID}");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                animalNickname = readResult.Trim();
+                                if (animalNickname.Length > 0)
+                                {
+                                    validNickname = true;
+                                    ourAnimals[i, 3] = "Nickname: " + animalNickname;
+                                }
+                            }
+                        } while (!validNickname);
+                    }
+                    
+                    // Check and update personality description if missing
+                    string currentPersonality = ourAnimals[i, 5].Replace("Personality: ", "");
+                    if (currentPersonality == "" || currentPersonality == "tbd")
+                    {
+                        bool validPersonality = false;
+                        do
+                        {
+                            Console.WriteLine($"Enter a personality description for ID #: {petID} (likes or dislikes, tricks, energy level)");
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                animalPersonalityDescription = readResult.Trim();
+                                if (animalPersonalityDescription.Length > 0)
+                                {
+                                    validPersonality = true;
+                                    ourAnimals[i, 5] = "Personality: " + animalPersonalityDescription;
+                                }
+                            }
+                        } while (!validPersonality);
+                    }
+                }
+            }
+            Console.WriteLine("Nickname and personality description fields are complete for all of our friends.");
+            Console.WriteLine("Press the Enter key to continue");
             readResult = Console.ReadLine();
             break;
 
